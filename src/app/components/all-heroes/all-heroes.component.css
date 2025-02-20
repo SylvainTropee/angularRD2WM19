@@ -1,0 +1,7 @@
+div{
+  @apply flex justify-center
+}
+
+button{
+  @apply m-2 p-5 bg-red-600 hover:bg-blue-800 text-white text-2xl rounded-md
+}
