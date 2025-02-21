@@ -2,6 +2,8 @@ import {Component} from '@angular/core';
 import {JsonPipe, NgForOf} from "@angular/common";
 import {Hero} from "../../models/hero";
 import {RouterLink} from "@angular/router";
+import {HeroService} from "../../services/hero.service";
+import {HttpClientModule} from "@angular/common/http";
 
 @Component({
   selector: 'app-all-heroes',
@@ -9,8 +11,10 @@ import {RouterLink} from "@angular/router";
   imports: [
     JsonPipe,
     NgForOf,
-    RouterLink
+    RouterLink,
+    HttpClientModule
   ],
+  providers : [HeroService],
   templateUrl: './all-heroes.component.html',
   styleUrl: './all-heroes.component.css'
 })
@@ -18,25 +22,20 @@ export class AllHeroesComponent {
 
   public heroes: Array<Hero>
 
-  constructor() {
+  constructor(private heroService : HeroService) {
     this.heroes = []
   }
 
-  public addHeroes() {
-    this.heroes.push({
-      id : 1,
-      name: "Hulk",
-      image: "https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/images/sm/332-hulk.jpg"
-    })
-    this.heroes.push({
-      id : 2,
-      name: "Batman",
-      image: "https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/images/sm/70-batman.jpg"
-    })
-    this.heroes.push({
-      id : 3,
-      name: "Wonder woman",
-      image: "https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/images/sm/720-wonder-woman.jpg"
-    })
+  public getHeroes() {
+    this.heroService.getHeroes().subscribe(
+      value => this.heroes = value
+    )
   }
 }
+
+
+
+
+
+
+

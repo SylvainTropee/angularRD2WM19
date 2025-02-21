@@ -1,1 +1,6 @@
-<p>Hero numéro : {{ id }}, plus d'infos à venir !</p>
+<div *ngIf="hero" class="flex flex-col items-center">
+  <p>{{ hero.name }}</p>
+  <img [src]="hero.images.sm" [alt]="hero.name" class="w-56">
+</div>
+
+
